@@ -33,13 +33,22 @@ models:
         description: ""
 
       - name: returned_at
-        description: ""
+        description: "When the order was returned"
+        tests:
+          - not null:
+              where: "status = 'Returned'"
 
       - name: shipped_at
-        description: ""
+        description: "When the order was shipped"
+        tests:
+          - not null:
+              where: "delivered_at is not null or status = 'Shipped'"
 
       - name: delivered_at
-        description: ""
+        description: "When order was delivered"
+        tests:
+          - not null:
+              where: "returned_at is not null or status ='Complete'"
 
       - name: num_of_item
         description: ""
